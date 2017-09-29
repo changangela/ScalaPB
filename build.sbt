@@ -55,7 +55,7 @@ lazy val root =
       runtimeJS,
       runtimeJVM,
       grpcRuntime,
-      compilerPlugin,
+      scalapbCompilerPlugin,
       compilerPluginShaded,
       proptest,
       scalapbc)
@@ -99,8 +99,7 @@ lazy val runtime = crossProject(JSPlatform, JVMPlatform, NativePlatform)
     nativeLinkStubs := true  // for utest
   )
 
-
-lazy val runtimeJVM    = runtime.jvm
+lazy val runtimeJVM    = runtime.jvm.settings(dottySettings)
 lazy val runtimeJS     = runtime.js
 lazy val runtimeNative = runtime.native
 
@@ -117,12 +116,13 @@ lazy val grpcRuntime = project.in(file("scalapb-runtime-grpc"))
       "org.mockito" % "mockito-core" % "2.10.0" % "test"
     )
   )
+  .settings(dottySettings)
 
 val shadeTarget = settingKey[String]("Target to use when shading")
 
 shadeTarget in ThisBuild := s"scalapbshade.v${version.value.replaceAll("[.-]","_")}.@0"
 
-lazy val compilerPlugin = project.in(file("compiler-plugin"))
+lazy val scalapbCompilerPlugin = project.in(file("compiler-plugin"))
   .settings(
     sourceGenerators in Compile += Def.task {
       val file = (sourceManaged in Compile).value / "scalapb" / "compiler" / "Version.scala"
@@ -147,13 +147,14 @@ lazy val compilerPlugin = project.in(file("compiler-plugin"))
       "org.scalatest" %% "scalatest" % "3.0.5" % "test"
     )
   )
+  .settings(dottySettings)
 
 // Until https://github.com/scalapb/ScalaPB/issues/150 is fixed, we are
 // publishing compiler-plugin bundled with protoc-bridge, and linked against
 // shaded protobuf. This is a workaround - this artifact will be removed in
 // the future.
 lazy val compilerPluginShaded = project.in(file("compiler-plugin-shaded"))
-  .dependsOn(compilerPlugin)
+  .dependsOn(scalapbCompilerPlugin)
   .settings(
     name := "compilerplugin-shaded",
     assemblyShadeRules in assembly := Seq(
@@ -184,10 +185,11 @@ lazy val compilerPluginShaded = project.in(file("compiler-plugin-shaded"))
   )
 
 lazy val scalapbc = project.in(file("scalapbc"))
-  .dependsOn(compilerPlugin)
+  .dependsOn(scalapbCompilerPlugin)
+  .settings(dottySettings)
 
 lazy val proptest = project.in(file("proptest"))
-  .dependsOn(runtimeJVM, grpcRuntime, compilerPlugin)
+  .dependsOn(runtimeJVM, grpcRuntime, scalapbCompilerPlugin)
     .configs( ShortTest )
     .settings( inConfig(ShortTest)(Defaults.testTasks): _*)
     .settings(
@@ -249,3 +251,17 @@ createVersionFile := {
   log.info(s"Created $f2")
 }
 
+lazy val dottyVersion = dottyLatestNightlyBuild.get
+
+lazy val dottySettings = List(
+  scalaVersion := dottyVersion,
+  libraryDependencies := libraryDependencies.value.map(_.withDottyCompat(scalaVersion.value)),
+  scalacOptions := List("-language:Scala2,implicitConversions")
+)
+
+TaskKey[Unit]("dottyCompile") := {
+  compile.in(runtimeJVM, Compile).value
+  compile.in(grpcRuntime, Compile).value
+  compile.in(scalapbCompilerPlugin, Compile).value
+  compile.in(scalapbc, Compile).value
+}
