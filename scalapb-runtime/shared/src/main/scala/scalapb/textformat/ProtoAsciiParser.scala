@@ -34,7 +34,7 @@ private[scalapb] object ProtoAsciiParser {
 
   val Value: P[TValue] = P(
     MessageValue | MessageArray |
-      ":" ~/ (MessageValue | ValueArray | PrimitiveValue)).opaque("':', '{', '<', or '['")
+      ":" ~/ (MessageValue | ValueArray | PrimitiveValue)).`opaque`("':', '{', '<', or '['")
 
   val KeyValue: P[TField] = P(
     Index ~ Basics.identifier ~/ Value

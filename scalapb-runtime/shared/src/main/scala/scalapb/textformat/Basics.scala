@@ -33,11 +33,11 @@ object Basics {
 
   val lineComment = P("#" ~ sameLineCharChunks.rep ~ &(Newline | End))
 
-  val whiteSpace = (CharIn(" \n\r\t\f") | lineComment).opaque("whitespace").rep
+  val whiteSpace = (CharIn(" \n\r\t\f") | lineComment).`opaque`("whitespace").rep
 
-  val identifier = P(CharIn('a' to 'z', 'A' to 'Z', '0' to '9', "_").rep(1).!).opaque("identifier")
+  val identifier = P(CharIn('a' to 'z', 'A' to 'Z', '0' to '9', "_").rep(1).!).`opaque`("identifier")
 
-  val literal = P(CharIn('a' to 'z', 'A' to 'Z', '0' to '9', "_-.").rep(1).!).opaque("literal")
+  val literal = P(CharIn('a' to 'z', 'A' to 'Z', '0' to '9', "_-.").rep(1).!).`opaque`("literal")
 
   val digits = P(CharsWhile(Digits))
   val hexDigits = P(CharsWhile(HexDigits))
@@ -62,13 +62,13 @@ object Basics {
   val escape = P("\\" ~ AnyChar)
   val singleBytesLiteral = P(
     "\"" ~/ (strNoDQChars | escape).rep.! ~ "\"" |
-      "'" ~/ (strNoQChars | escape).rep.! ~ "'").opaque("string")
+      "'" ~/ (strNoQChars | escape).rep.! ~ "'").`opaque`("string")
 
   val bytesLiteral = P(singleBytesLiteral.rep(1, whiteSpace)).map(_.mkString)
 
   val boolean: P[Boolean] = P(
     ("true" | "t" | "1").map(_ => true) |
-      ("false" | "f" | "0").map(_ => false)).opaque("'true' or 'false'")
+      ("false" | "f" | "0").map(_ => false)).`opaque`("'true' or 'false'")
 
   def ws(s: String): P[Unit] = P(s ~ &(whiteSpace))
 }
