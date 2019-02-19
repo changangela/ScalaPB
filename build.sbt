@@ -60,6 +60,15 @@ lazy val root =
       proptest,
       scalapbc)
 
+lazy val `dotty-community-build` = project
+  .in(file(".dotty-community-build"))
+  .aggregate(
+    runtimeJVM,
+    grpcRuntime,
+    scalapbCompilerPlugin,
+    scalapbc
+  )
+
 lazy val runtime = crossProject(JSPlatform, JVMPlatform, NativePlatform)
   .crossType(CrossType.Full).in(file("scalapb-runtime"))
   .settings(
@@ -251,17 +260,7 @@ createVersionFile := {
   log.info(s"Created $f2")
 }
 
-lazy val dottyVersion = dottyLatestNightlyBuild.get
-
 lazy val dottySettings = List(
-  scalaVersion := dottyVersion,
   libraryDependencies := libraryDependencies.value.map(_.withDottyCompat(scalaVersion.value)),
   scalacOptions := List("-language:Scala2,implicitConversions")
 )
-
-TaskKey[Unit]("dottyCompile") := {
-  compile.in(runtimeJVM, Compile).value
-  compile.in(grpcRuntime, Compile).value
-  compile.in(scalapbCompilerPlugin, Compile).value
-  compile.in(scalapbc, Compile).value
-}
