@@ -262,5 +262,5 @@ createVersionFile := {
 
 lazy val dottySettings = List(
   libraryDependencies := libraryDependencies.value.map(_.withDottyCompat(scalaVersion.value)),
-  scalacOptions := List("-language:Scala2,implicitConversions")
+  scalacOptions := List("-language:Scala2,implicitConversions", "-Xignore-scala2-macros")
 )
