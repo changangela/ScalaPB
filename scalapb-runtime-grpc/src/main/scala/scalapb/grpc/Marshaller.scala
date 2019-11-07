@@ -6,9 +6,9 @@ import scalapb.{GeneratedMessage, GeneratedMessageCompanion, Message, TypeMapper
 
 class Marshaller[T <: GeneratedMessage with Message[T]](companion: GeneratedMessageCompanion[T])
     extends io.grpc.MethodDescriptor.Marshaller[T] {
-  override def stream(t: T | JavaNull): InputStream = new ByteArrayInputStream(t.toByteArray)
+  override def stream(t: T | Null): InputStream = new ByteArrayInputStream(t.nn.toByteArray)
 
-  override def parse(inputStream: InputStream | JavaNull): T =
+  override def parse(inputStream: InputStream | Null): T =
     companion.parseFrom(inputStream.nn)
 }
 
@@ -16,10 +16,10 @@ class TypeMappedMarshaller[T <: GeneratedMessage with Message[T], Custom](
     typeMapper: TypeMapper[T, Custom],
     companion: GeneratedMessageCompanion[T]
 ) extends io.grpc.MethodDescriptor.Marshaller[Custom] {
-  override def stream(t: Custom | JavaNull): InputStream =
+  override def stream(t: Custom | Null): InputStream =
     new ByteArrayInputStream(typeMapper.toBase(t.nn).toByteArray)
 
-  override def parse(inputStream: InputStream | JavaNull): Custom =
+  override def parse(inputStream: InputStream | Null): Custom =
     typeMapper.toCustom(companion.parseFrom(inputStream.nn))
 }
 

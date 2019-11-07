@@ -8,9 +8,9 @@ object ProtoUtils {
   class ScalaPbMetadataMarshaller[T <: GeneratedMessage with Message[T]](
       companion: GeneratedMessageCompanion[T]
   ) extends Metadata.BinaryMarshaller[T] {
-    override def toBytes(value: T | JavaNull): Array[Byte] = value.nn.toByteArray
+    override def toBytes(value: T | Null): Array[Byte] = value.nn.toByteArray
 
-    override def parseBytes(serialized: Array[Byte] | JavaNull): T = {
+    override def parseBytes(serialized: Array[Byte] | Null): T = {
       try {
         companion.parseFrom(serialized.nn)
       } catch {
