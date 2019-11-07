@@ -63,7 +63,7 @@ object ScalapbProto extends _root_.scalapb.GeneratedFileObject {
   }
   lazy val javaDescriptor: com.google.protobuf.Descriptors.FileDescriptor = {
     val javaProto = com.google.protobuf.DescriptorProtos.FileDescriptorProto.parseFrom(ProtoBytes)
-    com.google.protobuf.Descriptors.FileDescriptor.buildFrom(javaProto, Array(
+    com.google.protobuf.Descriptors.FileDescriptor.buildFrom(javaProto, Array[com.google.protobuf.Descriptors.FileDescriptor | Null](
       com.google.protobuf.descriptor.DescriptorProtoCompanion.javaDescriptor
     ))
   }

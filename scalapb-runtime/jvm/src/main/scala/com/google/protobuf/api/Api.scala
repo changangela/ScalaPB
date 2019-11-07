@@ -30,14 +30,14 @@ import _root_.scalapb.internal.compat.JavaConverters._
   *   major version is derived from the package name, as outlined below. If the
   *   field is not empty, the version in the package name will be verified to be
   *   consistent with what is provided here.
-  *  
+  *
   *   The versioning schema uses [semantic
   *   versioning](http://semver.org) where the major version number
   *   indicates a breaking change and the minor version an additive,
   *   non-breaking change. Both version numbers are signals to users
   *   what to expect from different versions, and should be carefully
   *   chosen based on the product plan.
-  *  
+  *
   *   The major version is also reflected in the package name of the
   *   interface, which must end in `v&lt;major-version&gt;`, as in
   *   `google.feature.v1`. For major versions 0 and 1, the suffix can
@@ -65,7 +65,7 @@ final case class Api(
     private[this] var __serializedSizeCachedValue: _root_.scala.Int = 0
     private[this] def __computeSerializedValue(): _root_.scala.Int = {
       var __size = 0
-      
+
       {
         val __value = name
         if (__value != "") {
@@ -80,7 +80,7 @@ final case class Api(
         val __value = __item
         __size += 1 + _root_.com.google.protobuf.CodedOutputStream.computeUInt32SizeNoTag(__value.serializedSize) + __value.serializedSize
       }
-      
+
       {
         val __value = version
         if (__value != "") {
@@ -95,7 +95,7 @@ final case class Api(
         val __value = __item
         __size += 1 + _root_.com.google.protobuf.CodedOutputStream.computeUInt32SizeNoTag(__value.serializedSize) + __value.serializedSize
       }
-      
+
       {
         val __value = syntax
         if (__value != com.google.protobuf.`type`.Syntax.SYNTAX_PROTO2) {
@@ -302,14 +302,14 @@ object Api extends scalapb.GeneratedMessageCompanion[com.google.protobuf.api.Api
   def javaDescriptor: _root_.com.google.protobuf.Descriptors.Descriptor = ApiProto.javaDescriptor.getMessageTypes.get(0)
   def scalaDescriptor: _root_.scalapb.descriptors.Descriptor = ApiProto.scalaDescriptor.messages(0)
   def messageCompanionForFieldNumber(__number: _root_.scala.Int): _root_.scalapb.GeneratedMessageCompanion[_] = {
-    var __out: _root_.scalapb.GeneratedMessageCompanion[_] = null
+    var __out: _root_.scalapb.GeneratedMessageCompanion[_] | Null = null
     (__number: @_root_.scala.unchecked) match {
       case 2 => __out = com.google.protobuf.api.Method
       case 3 => __out = com.google.protobuf.`type`.OptionProto
       case 5 => __out = com.google.protobuf.source_context.SourceContext
       case 6 => __out = com.google.protobuf.api.Mixin
     }
-    __out
+    __out.nn
   }
   lazy val nestedMessagesCompanions: Seq[_root_.scalapb.GeneratedMessageCompanion[_ <: _root_.scalapb.GeneratedMessage]] = Seq.empty
   def enumCompanionForFieldNumber(__fieldNumber: _root_.scala.Int): _root_.scalapb.GeneratedEnumCompanion[_] = {

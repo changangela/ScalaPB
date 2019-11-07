@@ -12,8 +12,8 @@ object Grpc {
     Futures.addCallback(
       guavaFuture,
       new FutureCallback[A] {
-        override def onFailure(t: Throwable): Unit = p.failure(t)
-        override def onSuccess(a: A): Unit         = p.success(a)
+        override def onFailure(t: Throwable | Null): Unit = p.failure(t.nn)
+        override def onSuccess(a: A | Null): Unit         = p.success(a.nn)
       },
       MoreExecutors.directExecutor()
     )

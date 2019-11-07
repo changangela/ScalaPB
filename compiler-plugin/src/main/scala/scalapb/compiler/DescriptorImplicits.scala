@@ -940,7 +940,7 @@ class DescriptorImplicits(params: GeneratorParams, files: Seq[FileDescriptor]) {
   }
 
   def baseName(fileName: String) =
-    fileName.split("/").last.replaceAll(raw"[.]proto$$|[.]protodevel", "")
+    fileName.split("/").last.nn.replaceAll(raw"[.]proto$$|[.]protodevel", "")
 }
 
 private[scalapb] object DescriptorImplicits {

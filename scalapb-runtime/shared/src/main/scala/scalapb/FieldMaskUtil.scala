@@ -54,12 +54,12 @@ object FieldMaskUtil {
     }
 
     val array = name.split("\\_")
-    toLowerCase(array(0), buf)
+    toLowerCase(array(0).nn, buf)
 
     @tailrec
     def loop(i: Int): Unit = {
       if (i < array.length) {
-        toProperCase(array(i))
+        toProperCase(array(i).nn)
         loop(i + 1)
       }
     }
@@ -114,9 +114,9 @@ object FieldMaskUtil {
     val result = value
       .split(",")
       .toIterator
-      .withFilter(_.nonEmpty)
+      .withFilter(_.nn.nonEmpty)
       .map { path =>
-        camelCaseToSnakeCase(path)
+        camelCaseToSnakeCase(path.nn)
       }
       .toList
     FieldMask(result)

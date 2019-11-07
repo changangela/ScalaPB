@@ -37,35 +37,35 @@ final case class Method(
     private[this] var __serializedSizeCachedValue: _root_.scala.Int = 0
     private[this] def __computeSerializedValue(): _root_.scala.Int = {
       var __size = 0
-      
+
       {
         val __value = name
         if (__value != "") {
           __size += _root_.com.google.protobuf.CodedOutputStream.computeStringSize(1, __value)
         }
       };
-      
+
       {
         val __value = requestTypeUrl
         if (__value != "") {
           __size += _root_.com.google.protobuf.CodedOutputStream.computeStringSize(2, __value)
         }
       };
-      
+
       {
         val __value = requestStreaming
         if (__value != false) {
           __size += _root_.com.google.protobuf.CodedOutputStream.computeBoolSize(3, __value)
         }
       };
-      
+
       {
         val __value = responseTypeUrl
         if (__value != "") {
           __size += _root_.com.google.protobuf.CodedOutputStream.computeStringSize(4, __value)
         }
       };
-      
+
       {
         val __value = responseStreaming
         if (__value != false) {
@@ -76,7 +76,7 @@ final case class Method(
         val __value = __item
         __size += 1 + _root_.com.google.protobuf.CodedOutputStream.computeUInt32SizeNoTag(__value.serializedSize) + __value.serializedSize
       }
-      
+
       {
         val __value = syntax
         if (__value != com.google.protobuf.`type`.Syntax.SYNTAX_PROTO2) {
@@ -284,11 +284,11 @@ object Method extends scalapb.GeneratedMessageCompanion[com.google.protobuf.api.
   def javaDescriptor: _root_.com.google.protobuf.Descriptors.Descriptor = ApiProto.javaDescriptor.getMessageTypes.get(1)
   def scalaDescriptor: _root_.scalapb.descriptors.Descriptor = ApiProto.scalaDescriptor.messages(1)
   def messageCompanionForFieldNumber(__number: _root_.scala.Int): _root_.scalapb.GeneratedMessageCompanion[_] = {
-    var __out: _root_.scalapb.GeneratedMessageCompanion[_] = null
+    var __out: _root_.scalapb.GeneratedMessageCompanion[_] | Null = null
     (__number: @_root_.scala.unchecked) match {
       case 6 => __out = com.google.protobuf.`type`.OptionProto
     }
-    __out
+    __out.nn
   }
   lazy val nestedMessagesCompanions: Seq[_root_.scalapb.GeneratedMessageCompanion[_ <: _root_.scalapb.GeneratedMessage]] = Seq.empty
   def enumCompanionForFieldNumber(__fieldNumber: _root_.scala.Int): _root_.scalapb.GeneratedEnumCompanion[_] = {
