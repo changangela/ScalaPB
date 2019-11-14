@@ -397,7 +397,7 @@ object FileDescriptorProto extends scalapb.GeneratedMessageCompanion[com.google.
   def javaDescriptor: _root_.com.google.protobuf.Descriptors.Descriptor = DescriptorProtoCompanion.javaDescriptor.getMessageTypes.get(1)
   def scalaDescriptor: _root_.scalapb.descriptors.Descriptor = DescriptorProtoCompanion.scalaDescriptor.messages(1)
   def messageCompanionForFieldNumber(__number: _root_.scala.Int): _root_.scalapb.GeneratedMessageCompanion[_] = {
-    var __out: _root_.scalapb.GeneratedMessageCompanion[_] = null
+    var __out: _root_.scalapb.GeneratedMessageCompanion[_] | Null = null
     (__number: @_root_.scala.unchecked) match {
       case 4 => __out = com.google.protobuf.descriptor.DescriptorProto
       case 5 => __out = com.google.protobuf.descriptor.EnumDescriptorProto
@@ -406,7 +406,7 @@ object FileDescriptorProto extends scalapb.GeneratedMessageCompanion[com.google.
       case 8 => __out = com.google.protobuf.descriptor.FileOptions
       case 9 => __out = com.google.protobuf.descriptor.SourceCodeInfo
     }
-    __out
+    __out.nn
   }
   lazy val nestedMessagesCompanions: Seq[_root_.scalapb.GeneratedMessageCompanion[_ <: _root_.scalapb.GeneratedMessage]] = Seq.empty
   def enumCompanionForFieldNumber(__fieldNumber: _root_.scala.Int): _root_.scalapb.GeneratedEnumCompanion[_] = throw new MatchError(__fieldNumber)

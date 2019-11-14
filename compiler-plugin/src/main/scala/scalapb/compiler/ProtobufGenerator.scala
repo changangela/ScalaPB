@@ -1851,7 +1851,7 @@ object ProtobufGenerator {
   def parseParameters(params: String): Either[String, GeneratorParams] = {
     params
       .split(",")
-      .map(_.trim)
+      .map(_.nn.trim)
       .filter(_.nonEmpty)
       .foldLeft[Either[String, GeneratorParams]](Right(GeneratorParams())) {
         case (Right(params), "java_conversions") => Right(params.copy(javaConversions = true))
@@ -1874,7 +1874,7 @@ object ProtobufGenerator {
     request.getProtoFileList.asScala.foldLeft[Map[String, FileDescriptor]](Map.empty) {
       case (acc, fp) =>
         val deps = fp.getDependencyList.asScala.map(acc)
-        acc + (fp.getName -> FileDescriptor.buildFrom(fp, deps.toArray))
+        acc + (fp.getName -> FileDescriptor.buildFrom(fp, deps.toArray[FileDescriptor | Null]))
     }
 
   def handleCodeGeneratorRequest(request: CodeGeneratorRequest): CodeGeneratorResponse = {
@@ -1886,7 +1886,7 @@ object ProtobufGenerator {
             request.getProtoFileList.asScala.foldLeft[Map[String, FileDescriptor]](Map.empty) {
               case (acc, fp) =>
                 val deps = fp.getDependencyList.asScala.map(acc)
-                acc + (fp.getName -> FileDescriptor.buildFrom(fp, deps.toArray))
+                acc + (fp.getName -> FileDescriptor.buildFrom(fp, deps.toArray[FileDescriptor | Null]))
             }
           val implicits = new DescriptorImplicits(params, filesByName.values.toVector)
           val generator = new ProtobufGenerator(params, implicits)

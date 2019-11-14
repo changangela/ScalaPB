@@ -18,7 +18,7 @@ trait AnyMethods {
 
 object AnyMethods {
   private def typeNameFromTypeUrl(typeUrl: String): String = {
-    typeUrl.split("/").lastOption.getOrElse(typeUrl)
+    typeUrl.split("/").lastOption.getOrElse(typeUrl).nn
   }
 }
 

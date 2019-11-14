@@ -20,7 +20,7 @@ class LimitedInputStream(val is: InputStream, private var limit: Int)
       result
     }
 
-  override def read(bytes: Array[Byte], off: Int, len: Int): Int =
+  override def read(bytes: Array[Byte] | Null, off: Int, len: Int): Int =
     if (limit <= 0) {
       -1
     } else {

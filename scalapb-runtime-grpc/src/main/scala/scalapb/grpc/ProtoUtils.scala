@@ -8,11 +8,11 @@ object ProtoUtils {
   class ScalaPbMetadataMarshaller[T <: GeneratedMessage with Message[T]](
       companion: GeneratedMessageCompanion[T]
   ) extends Metadata.BinaryMarshaller[T] {
-    override def toBytes(value: T): Array[Byte] = value.toByteArray
+    override def toBytes(value: T | Null): Array[Byte] = value.nn.toByteArray
 
-    override def parseBytes(serialized: Array[Byte]): T = {
+    override def parseBytes(serialized: Array[Byte] | Null): T = {
       try {
-        companion.parseFrom(serialized)
+        companion.parseFrom(serialized.nn)
       } catch {
         case ipbe: InvalidProtocolBufferException =>
           throw new IllegalArgumentException(ipbe)

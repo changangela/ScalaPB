@@ -194,12 +194,12 @@ object CodeGeneratorRequest extends scalapb.GeneratedMessageCompanion[com.google
   def javaDescriptor: _root_.com.google.protobuf.Descriptors.Descriptor = PluginProto.javaDescriptor.getMessageTypes.get(1)
   def scalaDescriptor: _root_.scalapb.descriptors.Descriptor = PluginProto.scalaDescriptor.messages(1)
   def messageCompanionForFieldNumber(__number: _root_.scala.Int): _root_.scalapb.GeneratedMessageCompanion[_] = {
-    var __out: _root_.scalapb.GeneratedMessageCompanion[_] = null
+    var __out: _root_.scalapb.GeneratedMessageCompanion[_] | Null = null
     (__number: @_root_.scala.unchecked) match {
       case 15 => __out = com.google.protobuf.descriptor.FileDescriptorProto
       case 3 => __out = com.google.protobuf.compiler.plugin.Version
     }
-    __out
+    __out.nn
   }
   lazy val nestedMessagesCompanions: Seq[_root_.scalapb.GeneratedMessageCompanion[_ <: _root_.scalapb.GeneratedMessage]] = Seq.empty
   def enumCompanionForFieldNumber(__fieldNumber: _root_.scala.Int): _root_.scalapb.GeneratedEnumCompanion[_] = throw new MatchError(__fieldNumber)

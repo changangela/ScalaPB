@@ -376,11 +376,11 @@ object Field extends scalapb.GeneratedMessageCompanion[com.google.protobuf.`type
   def javaDescriptor: _root_.com.google.protobuf.Descriptors.Descriptor = TypeProto.javaDescriptor.getMessageTypes.get(1)
   def scalaDescriptor: _root_.scalapb.descriptors.Descriptor = TypeProto.scalaDescriptor.messages(1)
   def messageCompanionForFieldNumber(__number: _root_.scala.Int): _root_.scalapb.GeneratedMessageCompanion[_] = {
-    var __out: _root_.scalapb.GeneratedMessageCompanion[_] = null
+    var __out: _root_.scalapb.GeneratedMessageCompanion[_] | Null = null
     (__number: @_root_.scala.unchecked) match {
       case 9 => __out = com.google.protobuf.`type`.OptionProto
     }
-    __out
+    __out.nn
   }
   lazy val nestedMessagesCompanions: Seq[_root_.scalapb.GeneratedMessageCompanion[_ <: _root_.scalapb.GeneratedMessage]] = Seq.empty
   def enumCompanionForFieldNumber(__fieldNumber: _root_.scala.Int): _root_.scalapb.GeneratedEnumCompanion[_] = {
